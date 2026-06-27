@@ -29,6 +29,16 @@ Use these layers when designing or running the workflow:
 
 If a connector or API is unavailable, ask the user for exported text/CSV/screenshots or summarize from the provided context instead of blocking.
 
+## MECE Boundary with Other Skills
+
+This Skill owns the personal operating system layer: tasks, time evidence, project movement, knowledge-base entries, and automation graduation. It can ingest outputs from reading workflows, but it should not replace the reading coach or the note visualizer.
+
+| Incoming user need | Primary owner | This Skill's role |
+|---|---|---|
+| Daily/weekly planning, task hygiene, time review, project/accountability loop | `personal-ai-ops-workflow` | Own the full output |
+| Book triage, reading strategy, chapter dialogue, Feynman test, spaced retrieval | `ai-era-reading` | Store resulting decisions/artifacts if useful |
+| Existing reading notes to Mermaid/Markdown outline/key notes | `reading-notes-organizer` | File or link the structured note if it changes future action |
+
 ## Workflow Router
 
 Choose the smallest useful workflow:
@@ -36,7 +46,7 @@ Choose the smallest useful workflow:
 - **Daily start brief**: user asks what to focus on today, wants a morning plan, or shares today's tasks.
 - **Daily shutdown review**: user asks what happened today, why tasks slipped, or wants tomorrow's candidate plan.
 - **Weekly review**: user asks for weekly summary, GTD review, project/accountability review, or time allocation analysis.
-- **Knowledge distillation**: user shares articles, conversations, development lessons, decisions, or messy notes to preserve.
+- **Knowledge distillation**: user shares articles, conversations, development lessons, decisions, or messy non-book notes to preserve; for book-understanding work route to `ai-era-reading`, and for pure reading-note visualization route to `reading-notes-organizer`.
 - **Development operator**: user wants AI to manage project context, read a repo, track TODOs, prepare issues/PR notes, or extract reusable workflows from engineering work.
 - **Automation/SKILL extraction**: the same workflow has appeared at least three times or has a clear trigger, input, output, and validation rule.
 
