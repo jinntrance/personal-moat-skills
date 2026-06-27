@@ -53,6 +53,31 @@
 
 ---
 
+### 🧱 personal-moat-workflow-designer — 个人壁垒 Workflow 设计器
+
+把重复任务、项目经验和个人 know-how 沉淀为可复用的高杠杆工作流：
+- **护城河单元定义** — 明确触发场景、输入材料、产出和回写规则
+- **工具栈选择** — 按需求匹配 Obsidian/Notion、Skills、脚本、自动化、数据库与检索工具
+- **最小可运行 workflow** — 设计 SOP、checklist、prompt、自动化与质量门槛
+- **SKILL 沉淀判断** — 判断哪些 workflow 值得变成新的 AI Skill
+
+**触发方式：** 当用户想构建个人壁垒、设计工作流、沉淀 SOP/prompt/checklist/自动化，或询问“这个项目中可以用哪些工具”时使用。
+
+---
+
+### 🧠 knowledge-base-builder — 个人知识库构建器
+
+搭建能被自己和 AI 长期调用的个人知识库：
+- **捕获到输出闭环** — Capture → Distill → Link → Retrieve → Produce → Review
+- **知识库结构** — inbox、sources、atomic notes、MOC、workflows、projects、decisions、outputs
+- **笔记模板** — source note、atomic note、MOC、decision note
+- **AI 协作协议** — 让 AI 做连接、质疑、检索和流程沉淀，而不只是摘要
+
+**触发方式：** 当用户想搭建 Obsidian/Notion/Logseq/Markdown 知识库、整理长期笔记、设计标签/MOC、或用知识库构建个人壁垒时使用。
+
+---
+
+## 安装 Skills
 ### 📚 reading-notes-organizer — 读书笔记整理工具
 
 将**已经存在**的读书笔记自动转化为：
