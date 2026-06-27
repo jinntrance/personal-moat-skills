@@ -1,0 +1,4 @@
+interface:
+  display_name: "Personal AI Ops Workflow"
+  short_description: "个人任务、时间日志、知识沉淀与 AI 管家闭环"
+  default_prompt: "Use $personal-ai-ops-workflow to turn my tasks, time logs, development activity, and notes into a daily operating brief."
