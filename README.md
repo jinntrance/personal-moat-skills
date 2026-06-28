@@ -13,6 +13,7 @@
 | 做月度九宫格复盘，校准工作/生活/健康/关系/财务/成长等领域并规划下月 | `monthly-nine-grid-review` | 负责月复盘仪式：借鉴《只管去做》的愿景、年度九宫格、SMART、项目倒推、习惯和 4D，把月度事实转成下月九宫格推进项 | 可调用 `weekly-review-retrospective` 的周复盘结果和 `personal-ai-ops-workflow` 的任务/时间/知识层作为证据 |
 | 判断一本书值不值得读、怎么读、读中对质、读后检验与产出 | `ai-era-reading` | 负责阅读策略和理解质量：分流、读前预测、读中追问、读后费曼、间隔检索 | 需要把已有笔记做成脑图时，转交 `reading-notes-organizer` |
 | 已有一段读书笔记/摘录，要快速生成脑图、大纲和关键笔记 | `reading-notes-organizer` | 只做结构化整理和可视化，不替代读前分流、深读教练或检索练习 | 输出可作为 `ai-era-reading` 阶段 4 artifact 或 `personal-ai-ops-workflow` 知识记录输入 |
+| 用 ima copilot 收集和存储苹果备忘录、录音、截图、网页、微信资料，并用 LLM Wiki/workbuddy 编译成可维护个人 Wiki | `ima-llm-wiki-workflow` | 负责 ima 作为前台收集/回写层、LLM Wiki/workbuddy 作为中间编译层的 SOP、模板、质量检查和回写规则 | 通用知识库结构设计仍由 `knowledge-base-builder` 负责；日常任务/项目运营仍由 `personal-ai-ops-workflow` 负责 |
 
 ### 路由规则
 
@@ -100,6 +101,19 @@
 - **AI 协作协议** — 让 AI 做连接、质疑、检索和流程沉淀，而不只是摘要
 
 **触发方式：** 当用户想搭建 Obsidian/Notion/Logseq/Markdown 知识库、整理长期笔记、设计标签/MOC、或用知识库构建个人壁垒时使用。
+
+---
+
+### 🧩 ima-llm-wiki-workflow — ima + LLM Wiki 知识库流水线
+
+把腾讯 ima copilot 作为收集入口和更新后存储层，把 LLM Wiki、workbuddy 或开源 RAG/Wiki 框架作为中间编译器：
+- **混合输入收集** — 苹果备忘录、录音、截图、网页、微信资料、PDF 先进 ima
+- **Source Record 标准化** — 为每条输入生成稳定 ID、来源类型、转写/OCR、隐私级别和处理状态
+- **LLM Wiki 编译** — 去重、抽取实体、生成/更新 Wiki 页面、添加双链、标注冲突
+- **人工确认后回写** — 把 Source、Wiki Page、Review Log 写回 ima 对应空间
+- **周期性 Lint** — 检查未处理来源、孤立页面、重复页面、过期决策和隐私风险
+
+**触发方式：** 当用户明确希望“收集、更新后的存储都用 ima copilot”，中间用 LLM Wiki、workbuddy、Dify、RAGFlow、AnythingLLM、Khoj 等工具完成结构化知识编译时使用。
 
 ---
 
