@@ -1,0 +1,4 @@
+interface:
+  display_name: "Monthly Nine-Grid Review"
+  short_description: "用滴答清单、RescueTime 与笔记做月度九宫格复盘"
+  default_prompt: "Use $monthly-nine-grid-review to run a monthly nine-grid review from TickTick, RescueTime, and personal notes."

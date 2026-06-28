@@ -10,6 +10,7 @@
 |---|---|---|---|
 | 规划今天/复盘今天/整理任务、时间、项目和知识库 | `personal-ai-ops-workflow` | 负责日常个人运营闭环：任务、时间证据、开发进展、知识沉淀、自动化候选 | 可把读书产出的 artifact 收进知识库，但不负责读书教练过程 |
 | 做周度 Review/复盘，按 Get Clear/Get Current/Get Future 清空、回顾、规划下周 | `weekly-review-retrospective` | 负责周复盘仪式：Inbox/Waiting/Someday、时间与注意力、OKR/九宫格、习惯健康、阅读知识、财务风险、下周 P1/P2 | 可调用 `personal-ai-ops-workflow` 的任务/时间/知识层作为输入，但最终输出由周复盘 Skill 负责 |
+| 做月度九宫格复盘，校准工作/生活/健康/关系/财务/成长等领域并规划下月 | `monthly-nine-grid-review` | 负责月复盘仪式：借鉴《只管去做》的愿景、年度九宫格、SMART、项目倒推、习惯和 4D，把月度事实转成下月九宫格推进项 | 可调用 `weekly-review-retrospective` 的周复盘结果和 `personal-ai-ops-workflow` 的任务/时间/知识层作为证据 |
 | 判断一本书值不值得读、怎么读、读中对质、读后检验与产出 | `ai-era-reading` | 负责阅读策略和理解质量：分流、读前预测、读中追问、读后费曼、间隔检索 | 需要把已有笔记做成脑图时，转交 `reading-notes-organizer` |
 | 已有一段读书笔记/摘录，要快速生成脑图、大纲和关键笔记 | `reading-notes-organizer` | 只做结构化整理和可视化，不替代读前分流、深读教练或检索练习 | 输出可作为 `ai-era-reading` 阶段 4 artifact 或 `personal-ai-ops-workflow` 知识记录输入 |
 
@@ -17,7 +18,7 @@
 
 1. **先判定用户意图，不按关键词机械触发。** 同样出现“读书笔记”，如果用户要消化一本书，主 Skill 是 `ai-era-reading`；如果用户只要脑图，主 Skill 是 `reading-notes-organizer`。
 2. **一个请求只能有一个主 Skill。** 主 Skill 负责最终输出结构；其他 Skill 只能作为明确标注的辅助步骤。
-3. **从流程到资产逐级沉淀。** 阅读理解产出先进入 `ai-era-reading`，可视化整理进入 `reading-notes-organizer`，跨项目/跨周期的行动、复盘和自动化候选按粒度进入对应 Skill：周复盘进入 `weekly-review-retrospective`，日常运营进入 `personal-ai-ops-workflow`。
+3. **从流程到资产逐级沉淀。** 阅读理解产出先进入 `ai-era-reading`，可视化整理进入 `reading-notes-organizer`，跨项目/跨周期的行动、复盘和自动化候选按粒度进入对应 Skill：周复盘进入 `weekly-review-retrospective`，月度九宫格进入 `monthly-nine-grid-review`，日常运营进入 `personal-ai-ops-workflow`。
 4. **不把摘要当知识资产。** 只有能改变未来行动、判断或检索路径的内容，才进入个人知识库或被提升为 workflow/SKILL。
 
 ## 技能列表
@@ -34,6 +35,19 @@
 
 ---
 
+### 🧭 monthly-nine-grid-review — 月度九宫格复盘
+
+借鉴邹小强《只管去做》的愿景 → 年度九宫格 → 月计划 → 周计划 → 日行动落地思路，把一个月的工作、生活、健康、关系、财务、成长和心智状态做成证据化复盘：
+- **年度方向校准** — 检查年度九宫格/OKR 是否真正落到本月行动
+- **九宫格总览** — 每格记录事实、评分、根因、停止动作和下月推进项
+- **项目与习惯拆解** — 区分结果目标、项目里程碑和习惯连续性
+- **4D 任务清理** — 立刻做、计划做、委托/等待、删除
+- **下月落地链** — 把下月重点拆到第一周行动和每日最小动作
+
+**触发方式：** 当用户要做月度复盘、月总结、月底回顾、工作生活九宫格、《只管去做》月度复盘、OKR 月度检查、下月 KR 规划或极简清单时使用。
+
+---
+
 ### 🧭 personal-ai-ops-workflow — 个人 AI 运营管家
 
 把滴答清单、RescueTime、开发活动和知识库串成一个 human-in-the-loop 的个人运营系统：
@@ -42,7 +56,7 @@
 - **知识沉淀** — 把文章、对话、开发经验和决策转成可检索的笔记、workflow 或 SKILL 候选
 - **自动化分级** — 先让 AI 提建议、等用户确认，再逐步升级为半自动或全自动
 
-**触发方式：** 当用户提到滴答清单、RescueTime、每日计划、每日收尾、个人管家、AI 帮我整理任务/时间/知识库/开发进展，或想把重复流程沉淀为 workflow/SKILL 时使用。完整周复盘请使用 `weekly-review-retrospective`。
+**触发方式：** 当用户提到滴答清单、RescueTime、每日计划、每日收尾、个人管家、AI 帮我整理任务/时间/知识库/开发进展，或想把重复流程沉淀为 workflow/SKILL 时使用。完整周复盘请使用 `weekly-review-retrospective`；完整月度九宫格请使用 `monthly-nine-grid-review`。
 
 #### 适用场景
 见 `personal-ai-ops-workflow/SKILL.md` 和 `personal-ai-ops-workflow/references/templates.md`
