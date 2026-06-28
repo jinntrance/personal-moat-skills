@@ -1,0 +1,4 @@
+interface:
+  display_name: "ima LLM Wiki Workflow"
+  short_description: "用 ima 收集和存储，用 LLM Wiki 编译个人知识库"
+  default_prompt: "Use $ima-llm-wiki-workflow to design an SOP that uses ima copilot for capture/storage and LLM Wiki or workbuddy for knowledge compilation."
