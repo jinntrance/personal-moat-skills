@@ -17,7 +17,7 @@
 
 1. **先判定用户意图，不按关键词机械触发。** 同样出现“读书笔记”，如果用户要消化一本书，主 Skill 是 `ai-era-reading`；如果用户只要脑图，主 Skill 是 `reading-notes-organizer`。
 2. **一个请求只能有一个主 Skill。** 主 Skill 负责最终输出结构；其他 Skill 只能作为明确标注的辅助步骤。
-3. **从流程到资产逐级沉淀。** 阅读理解产出先进入 `ai-era-reading`，可视化整理进入 `reading-notes-organizer`，跨项目/跨周期的行动、复盘和自动化候选再进入 `personal-ai-ops-workflow`。
+3. **从流程到资产逐级沉淀。** 阅读理解产出先进入 `ai-era-reading`，可视化整理进入 `reading-notes-organizer`，跨项目/跨周期的行动、复盘和自动化候选按粒度进入对应 Skill：周复盘进入 `weekly-review-retrospective`，日常运营进入 `personal-ai-ops-workflow`。
 4. **不把摘要当知识资产。** 只有能改变未来行动、判断或检索路径的内容，才进入个人知识库或被提升为 workflow/SKILL。
 
 ## 技能列表
@@ -34,17 +34,15 @@
 
 ---
 
-
 ### 🧭 personal-ai-ops-workflow — 个人 AI 运营管家
 
 把滴答清单、RescueTime、开发活动和知识库串成一个 human-in-the-loop 的个人运营系统：
 - **每日启动 Brief** — 从任务、时间证据、开发进展中提炼今日 3 个重点
 - **每日收尾 Review** — 对照计划与现实，沉淀未完成原因、明日候选和知识资产
-- **每周复盘** — 聚合任务、时间、项目和知识库，识别注意力模式与下周重点
 - **知识沉淀** — 把文章、对话、开发经验和决策转成可检索的笔记、workflow 或 SKILL 候选
 - **自动化分级** — 先让 AI 提建议、等用户确认，再逐步升级为半自动或全自动
 
-**触发方式：** 当用户提到滴答清单、RescueTime、每日计划、周复盘、个人管家、AI 帮我整理任务/时间/知识库/开发进展，或想把重复流程沉淀为 workflow/SKILL 时使用。
+**触发方式：** 当用户提到滴答清单、RescueTime、每日计划、每日收尾、个人管家、AI 帮我整理任务/时间/知识库/开发进展，或想把重复流程沉淀为 workflow/SKILL 时使用。完整周复盘请使用 `weekly-review-retrospective`。
 
 #### 适用场景
 见 `personal-ai-ops-workflow/SKILL.md` 和 `personal-ai-ops-workflow/references/templates.md`

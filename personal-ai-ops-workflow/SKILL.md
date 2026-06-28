@@ -1,6 +1,6 @@
 ---
 name: personal-ai-ops-workflow
-description: 个人 AI 运营管家工作流。Use when the user wants to organize personal productivity around TickTick/滴答清单 tasks, RescueTime time logs, software development activity, GitHub/Git commits, knowledge base notes, daily planning, weekly review, personal moat building, workflow automation, or asking AI to act as a secretary/operator who prepares briefs, drafts outputs, tracks follow-ups, and waits for human feedback before committing important changes.
+description: 个人 AI 日常运营管家工作流。Use when the user wants daily planning, daily shutdown review, task hygiene, TickTick/滴答清单 task operations, RescueTime-informed day-level briefs, software development activity summaries, Git/GitHub project context, knowledge-base capture, personal moat building, workflow automation, or an AI secretary/operator for ongoing execution. Do not use for a full weekly review or GTD Weekly Review; route those to weekly-review-retrospective.
 ---
 
 # Personal AI Ops Workflow
@@ -35,7 +35,8 @@ This Skill owns the personal operating system layer: tasks, time evidence, proje
 
 | Incoming user need | Primary owner | This Skill's role |
 |---|---|---|
-| Daily/weekly planning, task hygiene, time review, project/accountability loop | `personal-ai-ops-workflow` | Own the full output |
+| Daily planning, daily shutdown, task hygiene, day-level time review, project/accountability loop | `personal-ai-ops-workflow` | Own the day-to-day operating output |
+| Full weekly review, GTD Weekly Review, Get Clear/Get Current/Get Future, next-week planning | `weekly-review-retrospective` | Defer to the dedicated weekly review Skill; provide task/time/knowledge inputs only if needed |
 | Book triage, reading strategy, chapter dialogue, Feynman test, spaced retrieval | `ai-era-reading` | Store resulting decisions/artifacts if useful |
 | Existing reading notes to Mermaid/Markdown outline/key notes | `reading-notes-organizer` | File or link the structured note if it changes future action |
 
@@ -45,12 +46,11 @@ Choose the smallest useful workflow:
 
 - **Daily start brief**: user asks what to focus on today, wants a morning plan, or shares today's tasks.
 - **Daily shutdown review**: user asks what happened today, why tasks slipped, or wants tomorrow's candidate plan.
-- **Weekly review**: user asks for weekly summary, GTD review, project/accountability review, or time allocation analysis.
 - **Knowledge distillation**: user shares articles, conversations, development lessons, decisions, or messy non-book notes to preserve; for book-understanding work route to `ai-era-reading`, and for pure reading-note visualization route to `reading-notes-organizer`.
 - **Development operator**: user wants AI to manage project context, read a repo, track TODOs, prepare issues/PR notes, or extract reusable workflows from engineering work.
 - **Automation/SKILL extraction**: the same workflow has appeared at least three times or has a clear trigger, input, output, and validation rule.
 
-For detailed output templates, read `references/templates.md` when producing a recurring brief, review, knowledge entry, or skill-candidate report.
+For detailed output templates, read `references/templates.md` when producing a daily brief, daily review, knowledge entry, or skill-candidate report. For full weekly review, route to `weekly-review-retrospective`.
 
 ## Daily Start Brief
 

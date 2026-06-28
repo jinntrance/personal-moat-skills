@@ -13,7 +13,28 @@ description: 周度 Review 与复盘 Skill。当用户想做每周复盘、GTD W
 2. **看清真实行为**：用任务、时间、项目、习惯、健康、阅读和财务证据复盘，而不是凭感觉自责。
 3. **设计下周行动**：只保留少数高杠杆重点，补齐风险预防、Waiting 跟进、Someday 推进和任务拆解。
 
-默认采用 **Get Clear → Get Current → Get Future** 三段式。AI 负责整理、质疑、提出候选动作；用户负责最终判断和确认写入。
+默认采用 **Get Clear → Get Current → Get Future** 三段式。AI 负责连接可用数据源、整理、质疑、提出候选动作；用户负责最终判断和确认写入。
+
+## 依赖与连接
+
+本 Skill 可以自动化取数，但必须显式区分“已连接”和“未连接”。不要假装已经读取了不可用的数据源。
+
+| 数据源 | 优先连接方式 | 需要的配置 | 未连接时降级 |
+|---|---|---|---|
+| 滴答清单 / TickTick | TickTick API、MCP、CLI 或已有 `personal-ai-ops-workflow` 任务层输出 | 滴答开放 API base URL：`TICKTICK_BASE_URL=https://api.dida365.com/open/v1`；访问令牌或用户导出的任务摘要 | 请用户粘贴/导出本周完成、逾期、Inbox、Waiting、Someday、OKR Timeline、Summary、统计截图或文本 |
+| RescueTime | RescueTime API、MCP、CSV 导出或截图 | RescueTime API key；日期范围；分类粒度 | 请用户贴本周 dashboard、highlights、top apps/sites、uncategorized time |
+| iPhone Screen Time | 用户截图或手动抄录 | 无稳定通用 API；需要用户提供截图/摘要 | 询问总时长、Top apps、>10 分钟但未记录的使用、通知/群组问题 |
+| 日历 | Calendar MCP、ICS/CSV 导出、截图或用户粘贴 | 日历账号/导出权限；未来 1–3 周范围 | 让用户贴下周日程和需要提前准备的事件 |
+| 健康 / Gyroscope | 固定链接、截图、CSV 或用户摘要 | 无 MCP 时只做人工回贴；关注工作时长、睡眠、运动、恢复 | 打开报表后让用户回贴关键指标；若工作时长逼近 70h，标为风险信号 |
+| 豆瓣 / 百度统计 / 博客 | 固定链接、截图、导出数据或用户摘要 | 无 MCP 时只做人工回贴；关注阅读页数、书评、UV、发布频率 | 提示用户回贴本周阅读/输出/流量关键数字 |
+| 财务 | 预算表、记账 App 导出、截图或用户摘要 | 不要求连接账户；优先用户手动提供高层摘要 | 只记录现金流、大额支出、待付款、风险，不索取敏感明细 |
+
+连接策略：
+
+1. 先列出本次可读取的数据源和缺失数据源。
+2. 可自动读取时，只读取复盘所需的周范围摘要，不做写入。
+3. 无连接时，使用“手动版”：给用户一个最小回贴清单，而不是中断流程。
+4. 所有任务创建、改期、删除、退群、禁用通知、知识库写入都必须进入“需要用户确认的改动”。
 
 ## 使用原则
 
@@ -26,7 +47,7 @@ description: 周度 Review 与复盘 Skill。当用户想做每周复盘、GTD W
 
 ## 输入清单
 
-按可获得程度使用，不要求一次全部提供：
+按可获得程度使用，不要求一次全部提供；先自动读取已连接源，再向用户索要缺失源的最小摘要：
 
 - 任务：滴答清单今日/本周完成、逾期、Inbox、Waiting、Someday、项目列表、OKR Timeline、Summary、统计。
 - 时间：RescueTime、iPhone Screen Time、日历、手动时间日志、无类别时间。
@@ -90,7 +111,7 @@ Checklist：
 
 - 分析习惯日志（+ / - / =）和 Routine：触发、阻力、奖励是否有效。
 - 用 Atomic Habits 四要素给出改进：明显、容易、有吸引力、令人满足。
-- 检查工作时长：理想约 50 小时，避免超过 70 小时；重点看效率和恢复。
+- 检查工作时长：理想约 50 小时，避免超过 70 小时；持续逼近 70 小时视为风险信号，重点看效率、恢复和下周降载动作。
 - 记录睡眠、运动、身体状态与工作表现之间的关系。
 
 #### 2.4 阅读、知识与输出
@@ -121,9 +142,28 @@ Checklist：
 7. 设定 120% 挑战项：只放 1–2 个拉伸动作，并标注不完成也不影响基本盘。
 8. 做风险预防：为最可能拖垮一周的 3 个风险设置提前动作。
 
+## 输出位置与命名
+
+默认把最终复盘文档保存为：
+
+```text
+reviews/weekly/weekly-review-YYYY-Www.md
+```
+
+其中 `YYYY` 是 ISO week-year，`Www` 是 ISO 周数，例如 `reviews/weekly/weekly-review-2026-W27.md`。如果用户已有 Obsidian/Notion/Logseq 目录，先沿用用户指定目录，但文件名仍保持 `weekly-review-YYYY-Www.md`，便于形成时间序列和后续检索。
+
+若当前环境不能写入用户知识库，则输出完整 Markdown，并在“需要用户确认的改动”中列出建议保存路径。
+
 ## 输出模板
 
 ```markdown
+---
+title: Weekly Review YYYY-Www
+week: YYYY-Www
+period: YYYY-MM-DD ~ YYYY-MM-DD
+type: weekly-review
+---
+
 # Weekly Review：YYYY-MM-DD ~ YYYY-MM-DD
 
 ## 1. 本周一句话
@@ -175,7 +215,10 @@ Checklist：
 - 周五缓冲/下周准备：
 - 120% 挑战项：
 
-## 5. 需要用户确认的改动
+## 5. 保存位置
+- 建议文件：reviews/weekly/weekly-review-YYYY-Www.md
+
+## 6. 需要用户确认的改动
 - [ ] 创建任务：
 - [ ] 改期/降级/删除：
 - [ ] 退出/关闭/禁用：
@@ -189,6 +232,7 @@ Checklist：
 - 至少引用 3 类证据：任务、时间、日历、项目、习惯、健康、阅读、财务之一。
 - 明确区分事实、解释和下步动作。
 - 产生 Waiting 跟进、下周 P1/P2、风险预防三类具体动作。
+- 指定保存路径，默认 `reviews/weekly/weekly-review-YYYY-Www.md`。
 - 下周计划不过载：P1 不超过 3 个，P2 不超过 5 个。
 - 每个 P1 都有可验证结果和第一步 next action。
 - 所有写入、删除、退群、禁用、改期建议都等待用户确认。
