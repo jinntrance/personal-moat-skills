@@ -12,6 +12,7 @@
 | 做周度 Review/复盘，按 Get Clear/Get Current/Get Future 清空、回顾、规划下周 | `weekly-review-retrospective` | 负责周复盘仪式：Inbox/Waiting/Someday、时间与注意力、OKR/九宫格、习惯健康、阅读知识、财务风险、下周 P1/P2 | 可调用 `personal-ai-ops-workflow` 的任务/时间/知识层作为输入，但最终输出由周复盘 Skill 负责 |
 | 做月度九宫格复盘，校准工作/生活/健康/关系/财务/成长等领域并规划下月 | `monthly-nine-grid-review` | 负责月复盘仪式：借鉴《只管去做》的愿景、年度九宫格、SMART、项目倒推、习惯和 4D，把月度事实转成下月九宫格推进项 | 可调用 `weekly-review-retrospective` 的周复盘结果和 `personal-ai-ops-workflow` 的任务/时间/知识层作为证据 |
 | 判断一本书值不值得读、怎么读、读中对质、读后检验与产出 | `ai-era-reading` | 负责阅读策略和理解质量：分流、读前预测、读中追问、读后费曼、间隔检索 | 需要把已有笔记做成脑图时，转交 `reading-notes-organizer` |
+| 同步豆瓣读书/微信读书的已读、短评、书评、划线、想法并做跨平台去重 | `reading-notes-sync` | 负责数据导出、断点续跑、本地 JSON 归档和跨来源合并索引，不负责解释笔记内容 | 导出后若要结构化整理，转交 `reading-notes-organizer`；若要读书复盘，转交 `ai-era-reading` |
 | 已有一段读书笔记/摘录，要快速生成脑图、大纲和关键笔记 | `reading-notes-organizer` | 只做结构化整理和可视化，不替代读前分流、深读教练或检索练习 | 输出可作为 `ai-era-reading` 阶段 4 artifact 或 `personal-ai-ops-workflow` 知识记录输入 |
 | 用 ima copilot 收集和存储苹果备忘录、录音、截图、网页、微信资料，并用 LLM Wiki/workbuddy 编译成可维护个人 Wiki | `ima-llm-wiki-workflow` | 负责 ima 作为前台收集/回写层、LLM Wiki/workbuddy 作为中间编译层的 SOP、模板、质量检查和回写规则 | 通用知识库结构设计仍由 `knowledge-base-builder` 负责；日常任务/项目运营仍由 `personal-ai-ops-workflow` 负责 |
 
@@ -136,6 +137,27 @@ cat my_notes.md | python reading-notes-organizer/scripts/process_notes.py --outp
 
 #### 示例
 见 `reading-notes-organizer/examples/sample_notes.md`
+
+---
+
+### 🔄 reading-notes-sync — 豆瓣 / 微信读书笔记同步归并
+
+把微信读书和豆瓣读书数据导出到本地 JSON，并按书名/作者做保守去重：
+- **微信读书** — 导出个人划线、想法/点评、每本书公开书评
+- **豆瓣读书** — 导出已读列表、评分、短评、标签、公开书评、公开笔记页
+- **本地归档** — 写入 `data/weread/`、`data/douban/` 和 `merged_books.json`
+- **断点续跑** — 已完成文件默认跳过，网络抖动后可重复执行
+
+**触发方式：** 当用户要同步、导出、归并、去重豆瓣读书与微信读书笔记/书评/短评/划线时使用。若用户要理解或整理笔记内容，再交给 `ai-era-reading` 或 `reading-notes-organizer`。
+
+#### 快速使用（命令行）
+```bash
+cd reading-notes-sync
+python3 scripts/weread_bulk_export.py --out-dir data/weread
+python3 scripts/weread_public_reviews_export.py --weread-dir data/weread --limit 20 --full-content
+python3 scripts/douban_export.py --user-id <douban_user_id> --out-dir data/douban --detail-limit 1000
+python3 scripts/merge_reading_notes.py --weread-dir data/weread --douban-dir data/douban --out data/merged_books.json
+```
 
 ---
 

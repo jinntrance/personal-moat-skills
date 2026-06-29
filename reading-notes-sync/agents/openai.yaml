@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reading Notes Sync"
+  short_description: "同步导出豆瓣微信读书笔记书评短评并去重归并成本地索引"
+  default_prompt: "Use $reading-notes-sync to export and merge my Douban and WeRead reading notes into local JSON files."
