@@ -11,6 +11,7 @@
 | 规划今天/复盘今天/整理任务、时间、项目和知识库 | `personal-ai-ops-workflow` | 负责日常个人运营闭环：任务、时间证据、开发进展、知识沉淀、自动化候选 | 可把读书产出的 artifact 收进知识库，但不负责读书教练过程 |
 | 做周度 Review/复盘，按 Get Clear/Get Current/Get Future 清空、回顾、规划下周 | `weekly-review-retrospective` | 负责周复盘仪式：Inbox/Waiting/Someday、时间与注意力、OKR/九宫格、习惯健康、阅读知识、财务风险、下周 P1/P2 | 可调用 `personal-ai-ops-workflow` 的任务/时间/知识层作为输入，但最终输出由周复盘 Skill 负责 |
 | 做月度九宫格复盘，校准工作/生活/健康/关系/财务/成长等领域并规划下月 | `monthly-nine-grid-review` | 负责月复盘仪式：借鉴《只管去做》的愿景、年度九宫格、SMART、项目倒推、习惯和 4D，把月度事实转成下月九宫格推进项 | 可调用 `weekly-review-retrospective` 的周复盘结果和 `personal-ai-ops-workflow` 的任务/时间/知识层作为证据 |
+| 改善睡眠质量、增加深睡、建立睡前流程或本地定时提醒 | `sleep-quality-coach` | 负责睡眠行为干预与提醒：晨间日光、咖啡因截止、运动窗口、晚餐、灯光、热水澡/泡脚、卧室降温、呼吸/NSDR | 周/月复盘可引用其睡眠执行记录；医学问题、持续失眠或疑似睡眠呼吸问题应建议专业评估 |
 | 判断一本书值不值得读、怎么读、读中对质、读后检验与产出 | `ai-era-reading` | 负责阅读策略和理解质量：分流、读前预测、读中追问、读后费曼、间隔检索 | 需要把已有笔记做成脑图时，转交 `reading-notes-organizer` |
 | 已有一段读书笔记/摘录，要快速生成脑图、大纲和关键笔记 | `reading-notes-organizer` | 只做结构化整理和可视化，不替代读前分流、深读教练或检索练习 | 输出可作为 `ai-era-reading` 阶段 4 artifact 或 `personal-ai-ops-workflow` 知识记录输入 |
 | 用 ima copilot 收集和存储苹果备忘录、录音、截图、网页、微信资料，并用 LLM Wiki/workbuddy 编译成可维护个人 Wiki | `ima-llm-wiki-workflow` | 负责 ima 作为前台收集/回写层、LLM Wiki/workbuddy 作为中间编译层的 SOP、模板、质量检查和回写规则 | 通用知识库结构设计仍由 `knowledge-base-builder` 负责；日常任务/项目运营仍由 `personal-ai-ops-workflow` 负责 |
@@ -46,6 +47,26 @@
 - **下月落地链** — 把下月重点拆到第一周行动和每日最小动作
 
 **触发方式：** 当用户要做月度复盘、月总结、月底回顾、工作生活九宫格、《只管去做》月度复盘、OKR 月度检查、下月 KR 规划或极简清单时使用。
+
+---
+
+### 🌙 sleep-quality-coach — 睡眠质量教练
+
+把“提高深睡”和“降低入睡阻力”转成每日可执行清单，并可在 macOS 上安装本地定时提醒：
+- **晨间对时** — 起床后户外日光 20-30 分钟
+- **咖啡因边界** — 14:00 前停止咖啡、茶、可乐、能量饮料等咖啡因
+- **运动与晚餐** — 傍晚有氧运动，晚餐加入适量复合碳水
+- **睡前降唤醒** — 调暗灯光、热水澡/泡脚、卧室降温、NSDR 或 4-7-8 呼吸
+- **本地提醒** — `sleep_reminder.py` + `launchd` 每 15 分钟检查到点提醒
+
+**触发方式：** 当用户想改善睡眠质量、增加深睡、建立晚间例行流程、控制咖啡因/蓝光、复盘睡眠数据，或设置睡眠相关定时提醒时使用。
+
+#### 快速使用（macOS）
+```bash
+python sleep-quality-coach/scripts/sleep_reminder.py --init-config --bedtime 23:30 --wake-time 07:30
+python sleep-quality-coach/scripts/sleep_reminder.py --list
+bash sleep-quality-coach/scripts/install_launch_agent.sh
+```
 
 ---
 
