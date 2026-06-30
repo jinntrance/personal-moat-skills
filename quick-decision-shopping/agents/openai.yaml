@@ -1,0 +1,4 @@
+interface:
+  display_name: "快速决策与购物"
+  short_description: "在日常选择和购物场景中快速做出够用决策，避免反复纠结。"
+  default_prompt: "帮我用快速决策与购物规则，在限定时间内判断这件东西/这个选择要不要做。"

@@ -11,6 +11,7 @@
 | 1. 收集 Capture：信息、想法、任务散落 | `personal-effectiveness-system` | 原始 inbox、聊天记录、会议记录、临时想法 | 去重后的 inbox 清单 | 不排序、不承诺执行 |
 | 2. 澄清 Clarify：不知道条目到底是什么 | `personal-effectiveness-system` | inbox 条目、背景、约束 | 项目 / 动作 / 等待 / 资料 / someday 分类 | 不做长期目标判断 |
 | 3. 取舍 Prioritize：事情太多，不知道先做什么 | `personal-effectiveness-system` | 已澄清清单、目标、截止期、能量 | Now / Next / Later / Drop | 不排具体日程 |
+| 3a. 快速决策 Decision：日常选择和购物反复纠结 | `quick-decision-shopping` | 商品/选择、预算、需求、候选项、平台信息 | 买 / 不买 / 延迟 / 奖励品结论，含时间盒和停止比较条件 | 不处理重大人生、医疗、法律或高风险财务决策 |
 | 4. 计划 Plan：目标太大，不知道怎么推进 | `personal-effectiveness-system` | 目标、项目、约束 | 里程碑、下一步、风险、验收标准 | 不替代执行现场反馈 |
 | 5. 执行 Execute：拖延、卡住、注意力分散 | `personal-effectiveness-system` | 当前任务、卡点、可用时间 | 25/50/90 分钟执行块、阻塞解除动作 | 不重开战略讨论 |
 | 6. 复盘 Review：做完了但没沉淀 | `personal-effectiveness-system` | 周期记录、结果、偏差 | 继续 / 停止 / 开始、系统调整 | 不责备用户 |
@@ -21,9 +22,10 @@
 
 1. 用户提出的是通用个人提效问题（任务、时间、目标、执行、复盘、习惯、知识资产）？→ `personal-effectiveness-system`。
 2. 用户是在问“这本书要不要读 / 怎么读 / 我读懂了吗 / 读完能产出什么”？→ `ai-era-reading`。
-3. 用户是在说“我已经有读书笔记，请帮我整理成脑图 / 大纲 / 摘要 / 可归档材料”？→ `reading-notes-organizer`。
-4. 用户同时需要消化与归档？→ 严格串行：先 `ai-era-reading` 完成理解检验与资产化，再 `reading-notes-organizer` 整理最终材料。
-5. 用户请求跨多个提效环节？→ 按 `Capture → Clarify → Prioritize → Plan → Execute → Review → Knowledge → Learning` 顺序推进，不跳步。
+3. 用户是在问“要不要买 / 选哪个 / 别让我纠结 / 帮我快速决定”，尤其涉及新品、二手、预算、销量、优惠、刚需、欲望或奖励品？→ `quick-decision-shopping`。
+4. 用户是在说“我已经有读书笔记，请帮我整理成脑图 / 大纲 / 摘要 / 可归档材料”？→ `reading-notes-organizer`。
+5. 用户同时需要消化与归档？→ 严格串行：先 `ai-era-reading` 完成理解检验与资产化，再 `reading-notes-organizer` 整理最终材料。
+6. 用户请求跨多个提效环节？→ 按 `Capture → Clarify → Prioritize → Plan → Execute → Review → Knowledge → Learning` 顺序推进，不跳步。
 
 ### 工具组合顺序
 
@@ -109,6 +111,23 @@ cat my_notes.md | python reading-notes-organizer/scripts/process_notes.py --outp
 #### 示例
 见 `reading-notes-organizer/examples/sample_notes.md`。
 
+### 🛒 quick-decision-shopping — 快速决策与购物
+
+把日常选择和购物决策限制在明确时间盒内，避免为了小决策持续消耗注意力：
+
+- **日常选择** — 普通选择不超过 1 个番茄钟
+- **新品购物** — 按 100 / 500 / 1000 元分档设置决策时限
+- **二手购物** — 用卖家信用、历史评价和合理价格过滤风险
+- **需求价值点** — 区分刚需、增值需求和欲望强度
+- **奖励品** — 可绑定习惯养成触发条件
+
+**触发方式：** 用户提到要不要买、选哪个、购物纠结、新品/二手、预算、优惠、销量、刚需、欲望、奖励品，或要求“快速决定”时使用。重大人生、医疗、法律或高风险财务决策不使用该快速规则。
+
+#### 适用场景
+见 `quick-decision-shopping/SKILL.md`。
+
+---
+
 ## 安装 Skills
 
 本仓库只保留 Skill 源目录，不提交生成后的 `.skill` 二进制包。需要安装时，可在本地从对应目录重新打包后导入 Claude 桌面应用的 Settings → Capabilities → Skills。
@@ -117,13 +136,14 @@ cat my_notes.md | python reading-notes-organizer/scripts/process_notes.py --outp
 zip -qr personal-effectiveness-system.skill personal-effectiveness-system
 zip -qr ai-era-reading.skill ai-era-reading
 zip -qr reading-notes-organizer.skill reading-notes-organizer
+zip -qr quick-decision-shopping.skill quick-decision-shopping
 ```
 
 ## 维护约定
 
 1. 新增工具时先在“MECE 工具地图”中确认它的独立任务边界。
 2. 每个 Skill 的 `description` 必须写清：触发条件、核心产出、与相邻工具的排除边界。
-3. 通用提效能力优先放入 `personal-effectiveness-system`；阅读理解放入 `ai-era-reading`；已有读书笔记结构化放入 `reading-notes-organizer`。
+3. 通用提效能力优先放入 `personal-effectiveness-system`；快速日常决策和购物判断放入 `quick-decision-shopping`；阅读理解放入 `ai-era-reading`；已有读书笔记结构化放入 `reading-notes-organizer`。
 4. 不提交生成后的 `.skill` 文件；如需分发或安装，在本地按需重新打包。
 
 ## 贡献
