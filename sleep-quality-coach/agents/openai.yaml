@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sleep Quality Coach"
+  short_description: "睡眠质量改善计划与本地定时提醒"
+  default_prompt: "Use $sleep-quality-coach to review my sleep routine and set practical reminders for tonight."
