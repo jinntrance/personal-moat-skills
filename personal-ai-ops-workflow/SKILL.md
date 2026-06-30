@@ -88,15 +88,19 @@ Goal: turn commitments and recent evidence into a realistic operating plan.
 Goal: convert the day into learning and a cleaner tomorrow.
 
 1. Compare planned tasks against completed tasks and RescueTime evidence.
-2. Separate unfinished work by cause:
+2. Cover three day-level review dimensions:
+   - 效率复盘（时间日志复盘）: compare planned focus blocks with RescueTime/time-log evidence, focus quality, context switching, and main attention leaks.
+   - 健康复盘（各类健康记录及变化）: summarize sleep, exercise, steps, mood, energy, symptoms, recovery, or other available health records and notable changes.
+   - 工作目标任务复盘（从滴答清单输出）: review TickTick completed/overdue/rescheduled tasks, planned-vs-actual completion, and progress against work goals.
+3. Separate unfinished work by cause:
    - Bad estimate
    - External interruption
    - Avoidance / unclear next action
    - Blocked dependency
    - No longer important
-3. Summarize real output, not just activity.
-4. Propose tomorrow's candidates and any task hygiene changes.
-5. Capture one lesson, decision, or reusable workflow if present.
+4. Summarize real output, not just activity.
+5. Propose tomorrow's candidates and any task hygiene changes.
+6. Capture one lesson, decision, or reusable workflow if present.
 
 ## Weekly Review
 

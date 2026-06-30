@@ -57,27 +57,32 @@ Load this reference when producing recurring briefs, reviews, knowledge records,
 ### 1. 实际产出
 - [Concrete shipped output]
 
-### 2. 计划 vs 现实
-| Planned | Actual | Reason |
-|---|---|---|
-|  |  |  |
+### 2. 效率复盘（时间日志复盘）
+| Planned focus / time block | Actual time evidence | Efficiency signal | Adjustment |
+|---|---|---|---|
+|  | RescueTime / time log / app-site usage | focus quality / context switching / attention leak |  |
 
-### 3. 时间证据
-- RescueTime signal:
-- Focus pattern:
-- Main distraction or context-switch source:
+### 3. 健康复盘（健康记录及变化）
+| Metric / record | Today | Change / signal | Note |
+|---|---|---|---|
+| Sleep / exercise / steps / mood / energy / symptoms / recovery |  | better / stable / worse / unknown |  |
 
-### 4. 未完成项处理
+### 4. 工作目标任务复盘（滴答清单完成度）
+| Goal / project | Planned tasks | Completed | Completion | Evidence / reason |
+|---|---|---|---|---|
+|  | TickTick planned / overdue / rescheduled |  | done / partial / missed |  |
+
+### 5. 未完成项处理
 | Item | Cause | Proposed next action |
 |---|---|---|
 |  | bad estimate / blocked / unclear / no longer important |  |
 
-### 5. 明日候选
+### 6. 明日候选
 1. 
 2. 
 3. 
 
-### 6. 沉淀
+### 7. 沉淀
 - Lesson:
 - Decision:
 - Workflow candidate:
