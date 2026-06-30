@@ -63,12 +63,20 @@ Goal: turn commitments and recent evidence into a realistic operating plan.
    - Recent development activity: Git commits, PRs, issues, local TODOs.
    - Any user-stated energy, constraints, or deadlines.
 2. Normalize commitments into:
+   - Priority: P0 / P1 / P2, with the reason tied to deadline, leverage, risk reduction, or user-stated importance.
    - Must do today
    - Should do if capacity allows
    - Waiting / blocked
-   - Candidate defer/delete/delegate
+   - Candidate 4D action: Do / Defer / Delegate / Delete
 3. Produce a brief with:
    - Top 3 focus outcomes
+   - SMART framing for each focus outcome where practical: specific result, measurable done signal, achievable scope, relevant reason, and time box/deadline.
+   - Practice-oriented description: translate vague intentions into concrete next actions, contexts, deliverables, and first steps as much as possible.
+   - Tags that explain motivation and work design:
+     - 自主感: where the user has choice/control.
+     - 专精感: where the task builds skill, capability, or craft.
+     - 目标感: where the task connects to a larger project, value, or personal moat.
+   - 4D tags for task triage: Do, Defer, Delegate, Delete.
    - A realistic time budget
    - Risks and likely interruptions
    - Proposed task edits, not silent edits
